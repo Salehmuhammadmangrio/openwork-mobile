@@ -7,7 +7,7 @@ import { LogBox, View } from 'react-native';
 import RootNavigator from './src/navigation/RootNavigator';
 import ToastHost from './src/components/ui/ToastHost';
 import { useAuthStore, useNotifStore, useChatStore } from './src/store';
-import { connectSocket, disconnectSocket, getSocket } from './src/utils/socket';
+import { connectSocket, disconnectSocket } from './src/utils/socket';
 import { useThemeStore } from './src/store/themeStore';
 
 LogBox.ignoreLogs([

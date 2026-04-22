@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert as RNAlert } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert as RNAlert, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '../../theme';
@@ -33,6 +33,17 @@ const ProfileHub = ({ navigation }) => {
   const bothRoles = canClient && canFreelancer;
 
   const confirmLogout = () => {
+    if (Platform.OS === 'web') {
+      // RN's Alert.alert is a no-op on web; use the browser's confirm instead.
+      if (typeof window !== 'undefined' && typeof window.confirm === 'function') {
+        if (window.confirm('Sign out? You can sign back in at any time.')) {
+          logout();
+        }
+      } else {
+        logout();
+      }
+      return;
+    }
     RNAlert.alert('Sign out?', 'You can sign back in at any time.', [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Sign out', style: 'destructive', onPress: () => logout() },
