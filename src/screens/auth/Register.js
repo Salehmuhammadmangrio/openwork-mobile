@@ -35,7 +35,7 @@ const Register = ({ navigation }) => {
     if (Object.keys(e).length) return;
 
     try {
-      await register({ name: name.trim(), email: email.trim(), password, role });
+      await register({ fullName: name.trim(), email: email.trim(), password, role });
       toast.success('Welcome to OpenWork!');
     } catch (err) {
       const msg = err?.response?.data?.message || 'Registration failed. Please try again.';
